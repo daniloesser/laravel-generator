@@ -1,50 +1,48 @@
 {
-    "name": "daniloesser/laravel-generator",
-    "description": "Laravel Generator: Automatically generate Laravel Framework files from a CLI command.",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Danilo Esser",
-            "email": "daniloesser@gmail.com"
-        }
-    ],
-    "require": {
-        "php": ">=5.6.4",
-        "doctrine/dbal": ">=2.5",
-        "illuminate/support": ">=5.1",
-        "illuminate/database": ">=5.1",
-        "illuminate/contracts": ">=5.1",
-        "illuminate/filesystem": ">=5.1",
-        "illuminate/console": ">=5.1",
-        "kitloong/laravel-migrations-generator": "dev-master"
-    },
-    "require-dev": {
-        "fzaninotto/faker": "~1.4",
-        "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~5.0"
-    },
-
-    "autoload": {
-        "psr-4": {
-            "CliGenerator\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "classmap": [
-            "tests/TestCase.php"
-        ]
-    },
-    "config": {
-        "preferred-install": "dist"
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "CliGenerator\\Code\\CodeServiceProvider"
-            ]
-        }
-    },
-
-    "minimum-stability": "dev"
+  "name": "daniloesser/laravel-generator",
+  "description": "Laravel Generator: Automatically generate Laravel Framework files from a CLI command.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Danilo Esser",
+      "email": "daniloesser@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.4",
+    "doctrine/dbal": ">=2.5",
+    "illuminate/support": ">=5.1",
+    "illuminate/database": ">=5.1",
+    "illuminate/contracts": ">=5.1",
+    "illuminate/filesystem": ">=5.1",
+    "illuminate/console": ">=5.1",
+    "kitloong/laravel-migrations-generator": "dev-master"
+  },
+  "require-dev": {
+    "fzaninotto/faker": "~1.4",
+    "mockery/mockery": "0.9.*",
+    "phpunit/phpunit": "~5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "CliGenerator\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests/TestCase.php"
+    ]
+  },
+  "config": {
+    "preferred-install": "dist"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "CliGenerator\\Code\\CodeServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev"
 }
