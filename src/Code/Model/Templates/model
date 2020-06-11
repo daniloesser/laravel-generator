@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * Created by CliGenerator Model.
+ */
+
+namespace {{namespace}};
+
+{{imports}}
+
+/**
+ * Class {{class}}{{ModelPrefix}}
+ * {{properties}}
+ *
+ * @package {{namespace}}
+ */
+class {{class}}{{ModelPrefix}}  extends {{parent}}
+{
+{{body}}
+}
