@@ -26,7 +26,8 @@ class CodeServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/../../config/cli-generator.php' => config_path('cli-generator.php'),
-            ], 'CliGenerator-models');
+            ], 'cli-generator');
+
 
             $this->commands([
                 CodeModelsCommand::class,
