@@ -6,7 +6,7 @@ to help the development process of Laravel applications by
 providing some convenient code-generation capabilities.
 
 
-This package is cloned from https://github.com/CliGenerator/laravel and it was updated to support more features.
+This package was cloned from https://github.com/reliese/laravel and it was updated to support more features.
 
 ## How does it work?
 
