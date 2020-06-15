@@ -57,7 +57,7 @@ class CodeServiceProvider extends ServiceProvider
                 $app->make('db'),
                 $app->make(Filesystem::class),
                 new Classify(),
-                new Config($app->make('config')->get('models'))
+                new Config($app->make('config')->get('cli-generator'))
             );
         });
     }
