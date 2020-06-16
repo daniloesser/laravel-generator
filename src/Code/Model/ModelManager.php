@@ -41,7 +41,7 @@ class ModelManager implements IteratorAggregate
      *
      * @return \CliGenerator\Code\Model\Model
      */
-    public function make($schema, $table, $mutators = [], $withRelations = true)
+    public function make($schema, $table, $mutators = [], $withRelations = true,$folder)
     {
         $mapper = $this->factory->makeSchema($schema);
 
@@ -51,7 +51,8 @@ class ModelManager implements IteratorAggregate
             return $this->models[$schema][$table];
         }
 
-        $model = new Model($blueprint, $this->factory, $mutators, $withRelations);
+        $model = new Model($blueprint, $this->factory, $mutators, $withRelations,$folder);
+        $model->setModelSubFolder($folder);
 
         if ($withRelations) {
             $this->models[$schema][$table] = $model;

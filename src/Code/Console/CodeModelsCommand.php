@@ -57,27 +57,48 @@ class CodeModelsCommand extends Command
         $connection = $this->getConnection();
         $schema = $this->getSchema($connection);
 
-        $folder = $this->ask('Please inform the Model folder:', 'Models');
-        $folder = ($folder=="Models")?"": ucfirst(strtolower(trim($folder)));
+        $existingTablesList = $this->models->on($connection)->makeSchema($schema)->tables();
+        $this->warn("Current tables list:");
 
-        $table = $this->ask('Please inform the Table name:');
+        $i=0;
+        foreach ($existingTablesList as $existingTable){
+            echo str_pad( $existingTable->table(), 40 );
+            $i++;
+            if($i==4){
+                echo "\n";
+                $i = 0;
+            }
+        }
+
+        $tablesList = $this->ask('Please inform Table(s) name separated by comma');
 
         // Check whether we just need to generate one table
-        if (is_null($table)) {
-            $this->error("Please inform a table name!");
+        if (is_null($tablesList)) {
+            $this->error("Please inform at least one table!");
             exit();
         }
 
+        $askFolder = strtolower(trim($this->ask('Would you like to store the generated files in a Model sub-folder?','No')));
+        $folder="";
+        if($askFolder!="no" && $askFolder!="n"){
+            $folder = $this->ask('Model sub-folder name');
+        }
+        $folder = ucfirst(strtolower(trim($folder)));
+
         try {
+            $selectedTables = explode(',',strtolower(trim($tablesList)));
+
+            foreach ($selectedTables as $table){
             $this->models->on($connection)->create($schema, $table, $folder);
             $this->info("Creating a model for table \"{$table}\" ...");
+            }
 
-            $createFactory = $this->ask('Would you like to create the Factory file too?', 'Yes');
-            if(strtolower(trim($createFactory))=="yes"){
-                $command = 'php artisan migrate:generate '. $table;
+            $createFactory = $this->ask('Would you like to create the Migration files too?', 'Yes');
+            if(strtolower(trim($createFactory))=="yes" || strtolower(trim($createFactory))=="y"){
+                $command = 'php artisan migrate:generate '. implode(',',$selectedTables);
                 $process = Process::fromShellCommandline($command);
 
-                $this->info("Creating the migration for model \"{$table}\" ...");
+                $this->info("Creating migration files for the following tables \"{$tablesList}\" ...");
 
                 $process->setTty(true);
 

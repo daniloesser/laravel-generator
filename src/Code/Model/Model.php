@@ -165,6 +165,11 @@ class Model
     /**
      * @var string
      */
+    protected $modelSubFolder = '';
+
+    /**
+     * @var string
+     */
     protected $relationNameStrategy = '';
 
     /**
@@ -175,12 +180,13 @@ class Model
      * @param \CliGenerator\Code\Model\Mutator[] $mutators
      * @param bool $loadRelations
      */
-    public function __construct(Blueprint $blueprint, Factory $factory, $mutators = [], $loadRelations = true)
+    public function __construct(Blueprint $blueprint, Factory $factory, $mutators = [], $loadRelations = true,$folder)
     {
         $this->blueprint = $blueprint;
         $this->factory = $factory;
         $this->loadRelations = $loadRelations;
         $this->mutators = $mutators;
+        $this->modelSubFolder = $folder;
         $this->configure();
         $this->fill();
     }
@@ -250,6 +256,15 @@ class Model
                 $this->relations[$reference->name()] = $reference;
             }
         }
+    }
+
+
+    /**
+     * @param string $modelSubFolder
+     */
+    public function setModelSubFolder(string $modelSubFolder): void
+    {
+        $this->modelSubFolder = $modelSubFolder;
     }
 
     /**
@@ -336,7 +351,7 @@ class Model
             return $this;
         }
 
-        return $this->factory->makeModel($database, $table, false);
+        return $this->factory->makeModel($database, $table, false,$this->getModelSubFolder());
     }
 
     /**
@@ -491,8 +506,8 @@ class Model
      */
     public function getBaseNamespace()
     {
-        return $this->usesBaseFiles()
-            ? $this->getNamespace().'\\Base'
+        return $this->getModelSubFolder()
+            ? $this->getNamespace()."\\".$this->getModelSubFolder()
             : $this->getNamespace();
     }
 
@@ -521,7 +536,7 @@ class Model
      */
     public function getQualifiedUserClassName()
     {
-        return '\\'.$this->getNamespace().'\\'.$this->getClassName().$this->getModelPrefix();
+        return '\\'.$this->getBaseNamespace().'\\'.$this->getClassName().$this->getModelPrefix();
     }
 
     /**
@@ -812,6 +827,14 @@ class Model
     public function getModelPrefix()
     {
         return $this->modelPrefix;
+    }
+
+    /**
+     * @return string
+     */
+    public function getModelSubFolder()
+    {
+        return $this->modelSubFolder;
     }
 
     /**

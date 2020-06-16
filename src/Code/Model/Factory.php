@@ -162,7 +162,7 @@ class Factory
     public function create($schema, $table,$folder)
     {
         try{
-            $model = $this->makeModel($schema, $table);
+            $model = $this->makeModel($schema, $table,true, $folder);
         }
         catch (\InvalidArgumentException $e){
             Throw new \Exception("Table \"{$table}\" was not found. Please check for typo or provide a custom Connection param.");
@@ -191,9 +191,9 @@ class Factory
      *
      * @return \CliGenerator\Code\Model\Model
      */
-    public function makeModel($schema, $table, $withRelations = true)
+    public function makeModel($schema, $table, $withRelations = true,$folder)
     {
-        return $this->models()->make($schema, $table, $this->mutators, $withRelations);
+        return $this->models()->make($schema, $table, $this->mutators, $withRelations,$folder);
     }
 
     /**
@@ -227,7 +227,7 @@ class Factory
             $blueprint = $related['blueprint'];
             $related['model'] = $model->getBlueprint()->is($blueprint->schema(), $blueprint->table())
                 ? $model
-                : $this->makeModel($blueprint->schema(), $blueprint->table(), false);
+                : $this->makeModel($blueprint->schema(), $blueprint->table(), false,$model->getModelSubFolder());
         }
 
         return $references;
@@ -256,7 +256,10 @@ class Factory
      */
     protected function fillTemplate($template, Model $model,$folder)
     {
-        $template = str_replace('{{namespace}}', $model->getBaseNamespace().(isset($folder)?"\\$folder":''), $template);
+
+
+        $template = str_replace('{{namespace}}', $model->getBaseNamespace(), $template);
+
         $template = str_replace('{{class}}', $model->getClassName(), $template);
 
         $template = str_replace('{{ModelPrefix}}', $model->getModelPrefix(), $template);
@@ -276,7 +279,7 @@ class Factory
         $usedClasses = array_unique($usedClasses);
 
         $usedClassesSection = $this->formatUsedClasses(
-            $model->getBaseNamespace().(isset($folder)?"\\$folder":''),
+            $model->getBaseNamespace(),
             $usedClasses,
             $model->getClassName()
         );
