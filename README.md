@@ -59,7 +59,7 @@ public function register()
 }
 ```
 
-## Configuration
+### Custom configuration
 
 
 
