@@ -6,8 +6,11 @@ to help the development process of Laravel applications by
 providing some convenient code-generation capabilities.
 
 At the moment, this package is capable of generating the following:
-* **Models** - with eloquent relations
-* **Migrations** - with fields  
+- [x] **Models** - with eloquent relations
+- [x] **Migrations** - with fields and faker types
+- [ ] **Seeders** - with fields and faker types
+- [ ] **Factories** - with fields and faker types
+
 
 
 This package was forked from **reliese/laravel** and it was improved to support more features.
@@ -22,7 +25,7 @@ You will need to import the `daniloesser/laravel-generator` package via composer
 composer require daniloesser/laravel-generator
 ```
 
-### Configuration
+## Configuration
 
 Add the service provider to your `config/app.php` file within the `providers` key:
 
@@ -56,7 +59,7 @@ public function register()
 }
 ```
 
-## Models
+## Configuration
 
 
 
@@ -67,7 +70,7 @@ php artisan vendor:publish --tag=cli-generator
 php artisan config:clear
 ```
 
-### Usage
+## Usage
 
 - Invoke the generator:
 
@@ -96,7 +99,7 @@ E.G: Payment
 - After finishing Models generation, you will be prompted for migration generation as well.
 
 
-#### Support
+## Support
 
 For now, this package only supports MySQL databases.
 
