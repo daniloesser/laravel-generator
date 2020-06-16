@@ -1,12 +1,17 @@
 # Laravel Generator
 
 
-The Laravel Generator is a collection of Laravel CLI commands which aim is 
+The Laravel Generator is a Laravel CLI command which aim is 
 to help the development process of Laravel applications by 
 providing some convenient code-generation capabilities.
 
+At the moment, this package is capable of generating the following:
+* **Models** - with eloquent relations
+* **Migrations** - with fields  
 
-This package was cloned from https://github.com/reliese/laravel and it was updated to support more features.
+
+This package was forked from **reliese/laravel** and it was improved to support more features.
+Also, I'm using the package **kitloong/laravel-migrations-generator** to support migration generation. 
 
 ## How does it work?
 
@@ -64,7 +69,7 @@ php artisan config:clear
 
 ### Usage
 
-- You can scaffold a specific table like this:
+- Invoke the generator:
 
 ```shell
 php artisan code:generate
@@ -76,15 +81,26 @@ php artisan code:generate
 php artisan code:generate --connection=mysql
 ```
 
-- If you are using a MySQL database, you can specify which schema you want to scaffold:
+- You will be prompted for which tables you want to scaffold from a list. You can pass more than one, separating them by a comma:
 
 ```shell
-php artisan code:generate --schema=shop
+E.G: cities,states,countries
 ```
+
+- Additionally, you can inform a Model sub-folder to create the files in a specific folder/namespace:
+
+```shell
+E.G: Payment
+```
+
+- After finishing Models generation, you will be prompted for migration generation as well.
+
 
 #### Support
 
-For the time being, this package only supports MySQL databases.
+For now, this package only supports MySQL databases.
+
+Some customization is possible. Just check options inside cli-generator file.
 
 
 
