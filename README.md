@@ -8,8 +8,8 @@ providing some convenient code-generation capabilities.
 At the moment, this package is capable of generating the following:
 - [x] **Models** - with eloquent relations
 - [x] **Migrations** - with fields and faker types
-- [ ] **Seeders** - with fields and faker types
-- [ ] **Factories** - with fields and faker types
+- [ ] **Seeders** 
+- [ ] **Factories** 
 
 
 
