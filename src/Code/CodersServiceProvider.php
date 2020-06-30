@@ -23,14 +23,21 @@ class CodeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $viewPath = __DIR__ . '/../resources/views';
+        $this->loadViewsFrom($viewPath, 'cli-generator');
+
         if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__ . '/../../config/cli-generator.php' => config_path('cli-generator.php'),
-            ], 'cli-generator');
+            $this->publishes(
+                [
+                    __DIR__ . '/../../config/cli-generator.php' => config_path('cli-generator.php'),
+                ],
+                'cli-generator'
+            );
 
 
-            $this->commands([
-                CodeModelsCommand::class,
+            $this->commands(
+                [
+                    CodeModelsCommand::class,
             ]);
         }
     }
@@ -52,14 +59,22 @@ class CodeServiceProvider extends ServiceProvider
      */
     protected function registerModelFactory()
     {
-        $this->app->singleton(ModelFactory::class, function ($app) {
-            return new ModelFactory(
-                $app->make('db'),
-                $app->make(Filesystem::class),
-                new Classify(),
-                new Config($app->make('config')->get('cli-generator'))
-            );
-        });
+        $viewPath = __DIR__ . '/../resources/views';
+        $this->loadViewsFrom($viewPath, 'cli-generator');
+
+
+        $this->app->singleton(
+            ModelFactory::class,
+            function ($app) {
+                return new ModelFactory(
+                    $app->make('db'),
+                    $app->make(Filesystem::class),
+                    new Classify(),
+                    new Config($app->make('config')->get('cli-generator')),
+                    $app['view']
+                );
+            }
+        );
     }
 
     /**
