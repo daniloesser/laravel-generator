@@ -8,8 +8,9 @@ providing some convenient code-generation capabilities.
 At the moment, this package is capable of generating the following:
 - [x] **Models** - with eloquent relations
 - [x] **Migrations** - with fields and faker types
+- [x] **Factories** 
 - [ ] **Seeders** 
-- [ ] **Factories** 
+
 
 
 
@@ -96,7 +97,7 @@ E.G: cities,states,countries
 E.G: Payment
 ```
 
-- After finishing Models generation, you will be prompted for migration generation as well.
+- After finishing Models generation, you will be prompted for migrations and factories generation as well.
 
 
 ## Support
