@@ -7,8 +7,8 @@ providing some convenient code-generation capabilities.
 
 At the moment, this package is capable of generating the following:
 - [x] **Models** - with eloquent relations
-- [x] **Migrations** - with fields and faker types
-- [x] **Factories** 
+- [x] **Migrations** - with custom field types and foreign keys relations
+- [x] **Factories** - with proper faker types
 - [ ] **Seeders** 
 
 
