@@ -42,4 +42,9 @@ class Config
 
         return $specific;
     }
+
+    public function getByKey($key)
+    {
+        return Arr::get($this->config, "*.$key");
+    }
 }

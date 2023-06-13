@@ -51,6 +51,10 @@ class Factory
      */
     protected $mutators = [];
 
+
+    protected $view;
+
+
     /**
      * ModelsFactory constructor.
      *
@@ -59,12 +63,13 @@ class Factory
      * @param \CliGenerator\Support\Classify $writer
      * @param \CliGenerator\Code\Model\Config $config
      */
-    public function __construct(DatabaseManager $db, Filesystem $files, Classify $writer, Config $config)
+    public function __construct(DatabaseManager $db, Filesystem $files, Classify $writer, Config $config, $view)
     {
         $this->db = $db;
         $this->files = $files;
         $this->config = $config;
         $this->class = $writer;
+        $this->view = $view;
     }
 
     /**
@@ -181,6 +186,7 @@ class Factory
         if ($this->needsUserFile($model)) {
             $this->createUserFile($model);
         }
+        return $model->getClassName() . $model->getModelPrefix();
     }
 
     /**
@@ -600,5 +606,13 @@ class Factory
         }
 
         return $this->config->get($blueprint, $key, $default);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getView()
+    {
+        return $this->view;
     }
 }
