@@ -17,7 +17,7 @@
     "illuminate/contracts": ">=5.1",
     "illuminate/filesystem": ">=5.1",
     "illuminate/console": ">=5.1",
-    "kitloong/laravel-migrations-generator": "^4.3",
+    "kitloong/laravel-migrations-generator": "^6.10",
     "doctrine/dbal": "^2.9"
   },
   "require-dev": {
